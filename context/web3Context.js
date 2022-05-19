@@ -185,6 +185,8 @@ export function Web3Wrapper({ children }) {
         setWasmClient(signingClient);
       } catch (e) {
         setError(e.message);
+      } finally {
+        setLoading(false);
       }
     } else {
       setError("install/update keplr");

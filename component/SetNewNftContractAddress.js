@@ -26,7 +26,7 @@ export const SetNewNftContractAddress = () => {
   };
   return (
     <Modal
-      open={nftContractAddress === null}
+      open={!nftContractAddress}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
