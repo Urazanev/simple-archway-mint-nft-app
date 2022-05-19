@@ -51,17 +51,20 @@ export function Web3Wrapper({ children }) {
       }
     }
   };
-  const mintNft = async (extension) => {
+  const mintNft = async (extension, customContractAddress) => {
     try {
       setLoading(true);
       const { tokens } = await getNftTokens();
-      await executeTransaction({
-        mint: {
-          token_id: String(tokens.length),
-          owner: walletAddress,
-          extension,
+      await executeTransaction(
+        {
+          mint: {
+            token_id: String(tokens.length),
+            owner: walletAddress,
+            extension,
+          },
         },
-      });
+        customContractAddress
+      );
     } catch (e) {
       console.warn("Error executing mint tx", e);
       setError(e.message);
