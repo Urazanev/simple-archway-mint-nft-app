@@ -20,11 +20,11 @@ export function Web3Wrapper({ children }) {
   );
 
   useEffect(() => {
-    if (wasmClient) {
+    if (wasmClient && nftContractAddress) {
       getNfts();
       updateBalance();
     }
-  }, [wasmClient]);
+  }, [wasmClient, nftContractAddress]);
 
   useEffect(() => {
     connectClient();
@@ -105,8 +105,9 @@ export function Web3Wrapper({ children }) {
       }
       console.log({ listOfNfts });
     } catch (e) {
-      console.log("get NFTs failed", e);
-      setError(e.message);
+      console.error(`failed to load contract ${nftContractAddress}`, e);
+      setError("failed to load NFT contract");
+      setNftContractAddress(null);
     } finally {
       setNftsList(listOfNfts);
       setLoading(false);
@@ -120,13 +121,13 @@ export function Web3Wrapper({ children }) {
     setBalance(null);
   };
 
-  const executeTransaction = async (entrypoint) => {
+  const executeTransaction = async (entrypoint, contractAddress) => {
     try {
       setLoading(true);
       const txFee = calculateFee(300000, GasPrice.fromString("0.002uconst"));
       const tx = await wasmClient.execute(
         walletAddress,
-        nftContractAddress,
+        contractAddress ?? nftContractAddress,
         entrypoint,
         txFee
       );
@@ -166,7 +167,7 @@ export function Web3Wrapper({ children }) {
     console.log("Connecting wasm client...");
     if (window?.keplr?.experimentalSuggestChain) {
       try {
-        setError("");
+        setError(null);
         setLoading(true);
         const { chainId, rpc } = chainInfo;
         const offlineSigner = await window.getOfflineSigner(chainId);
@@ -191,7 +192,7 @@ export function Web3Wrapper({ children }) {
     console.log("Connecting wallet...");
     if (window?.keplr?.experimentalSuggestChain) {
       try {
-        setError("");
+        setError(null);
         const { chainId } = chainInfo;
 
         await window.keplr.experimentalSuggestChain(chainInfo);
@@ -200,7 +201,7 @@ export function Web3Wrapper({ children }) {
 
         await connectClient();
       } catch (e) {
-        console.log(e.message);
+        console.error(e.message);
         setError(e.message);
       }
     } else {
@@ -225,6 +226,7 @@ export function Web3Wrapper({ children }) {
         setError,
         transferNft,
         loading,
+        setNftContractAddress,
       }}
     >
       {children}
