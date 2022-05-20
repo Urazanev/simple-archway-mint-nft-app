@@ -1,0 +1,15 @@
+.error-alert-dialog {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+}
+.success-alert-dialog {
+  position: fixed;
+  top: 50px;
+  right: 20px;
+}
+
+.card-img-container {
+  height: 50vh !important;
+  width: 100%;
+}

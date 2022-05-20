@@ -598,16 +598,6 @@ progress {
 .blockquote-footer::before {
   content: "— ";
 }
-.error-alert-dialog {
-  position: absolute;
-  top: 100px;
-  right: 20px;
-}
-.success-alert-dialog {
-  position: absolute;
-  top: 50px;
-  right: 20px;
-}
 .img-fluid {
   max-width: 100%;
   height: auto;

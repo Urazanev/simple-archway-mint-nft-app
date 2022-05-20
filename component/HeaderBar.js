@@ -2,14 +2,12 @@ import React, { useCallback } from "react";
 import LogoutIcon from "@mui/icons-material/Logout";
 import IconButton from "@mui/material/IconButton";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import Avatar from "@mui/material/Avatar";
-
 import { useRouter } from "next/router";
-
 import { cutAddress, getTokenBalance } from "../utils";
 import { useWeb3Context } from "../context/web3Context";
 import Link from "next/link";
 import Button from "@mui/material/Button";
+import Image from "next/image";
 
 const HeaderBar = () => {
   const router = useRouter();
@@ -23,7 +21,7 @@ const HeaderBar = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container px-4 px-lg-5">
         <IconButton color="inherit" onClick={() => router.push("/")}>
-          <Avatar alt="Archway market" src="/archwayLogo.svg" />
+          <Image src="/archwayLogo.svg" height={30} width={30} />
         </IconButton>
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">

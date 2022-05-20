@@ -19,7 +19,6 @@ export const ErrorAlertDialog = () => {
   const [message, setMessage] = useState(null);
   const {error} = useWeb3Context();
   useEffect(() => {
-    console.log("error comp", error);
     if (error) {
       setMessage(error);
       setTimeout(() => setMessage(null), 3000);

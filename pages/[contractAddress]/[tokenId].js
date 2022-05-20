@@ -5,6 +5,7 @@ import { useWeb3Context } from "../../context/web3Context";
 import { cutAddress, makeHttpUrl } from "../../utils";
 import { TransferNftModal } from "../../component/TransferNftModal";
 import Button from "@mui/material/Button";
+import Image from "next/image";
 
 const NftDetail = () => {
   const router = useRouter();
@@ -24,11 +25,9 @@ const NftDetail = () => {
       <div className="container px-4 px-lg-5 my-5">
         <div className="row gx-4 gx-lg-5 align-items-center">
           <div className="col-md-6">
-            <img
-              className="card-img-top mb-5 mb-md-0"
-              src={makeHttpUrl(image)}
-              alt={name}
-            />
+            <div className="card-img-container position-relative">
+              <Image layout="fill" src={makeHttpUrl(image)} alt={name} objectFit="contain"/>
+            </div>
           </div>
           <div className="col-md-6">
             <h1 className="display-5 fw-bolder">{name}</h1>

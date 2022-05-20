@@ -1,4 +1,5 @@
 import "../styles.css";
+import "../custom.css";
 import Layout from "../component/layout";
 import { Web3Wrapper } from "../context/web3Context";
 
